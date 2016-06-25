@@ -87,6 +87,10 @@ describe('ItemService', () => {
 			itemService.addItem(newItem);
 			expect(itemService.getItem(5)).toEqual(newItem);
 		});
+
+		it('should be able to handle both string and number param', () => {
+			expect(itemService.getItem(4)).toEqual(itemService.getItem('4'));
+		});
 	});
 
 });

@@ -56,6 +56,7 @@
 		};
 
 		this.getItem = function(id) {
+			id = +id;
 			return _.find(items, (i) => i.id === id);
 		};
 	}

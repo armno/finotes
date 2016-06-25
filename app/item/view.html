@@ -1,0 +1,21 @@
+<md-content layout-padding>
+	<form>
+	<md-input-container class="md-block" flex-gt-xs>
+		<label for="name">Name</label>
+		<input id="name" value="{{ viewItem.item.name }}" type="text",
+			readonly>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label for="value">Value (THB)</label>
+		<input id="value" value="{{ viewItem.item.value }}" type="text"
+		readonly>
+	</md-input-container>
+
+	<div layout="row">
+	<md-button ng-click="viewItem.goBack()">Back</md-button>
+	<span flex></span>
+	<md-button class="md-raised md-primary"
+		ng-click="viewItem.edit(viewItem.item)">Edit</md-button>
+	</div>
+	</form>
+</md-content>
