@@ -28,10 +28,10 @@
 			}
 		];
 
-		this.add = function(newItem) {
+		this.addItem = function(newItem) {
 			var deferred = $q.defer();
 
-			newItem.createdAt = new Date().getTime();
+			newItem.createdAt = Math.floor(Date.now() / 1000);
 			items.push(newItem);
 			deferred.resolve(true);
 
