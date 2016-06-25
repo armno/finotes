@@ -2,30 +2,44 @@
 	angular.module('finotes')
 		.service('ItemService', ItemService);
 
-	function ItemService() {
-		this.getItems = function() {
-			return [
+	ItemService.$inject = ['$q'];
+
+	function ItemService($q) {
+		var items = [
 			{
-				id: 1,
 				name: 'Food',
-				value: 35
+				value: 35,
+				createdAt: 1466836632981
 			},
 			{
-				id: 2,
 				name: 'Coffee',
-				value: 75
+				value: 75,
+				createdAt: 1466836632983
 			},
 			{
-				id: 3,
 				name: 'Drink',
-				value: 90
+				value: 90,
+				createdAt: 1466836632984
 			},
 			{
-				id: 4,
 				name: 'Gas',
-				value: 500
+				value: 500,
+				createdAt: 1466836632985
 			}
-			];
+		];
+
+		this.add = function(newItem) {
+			var deferred = $q.defer();
+
+			newItem.createdAt = new Date().getTime();
+			items.push(newItem);
+			deferred.resolve(true);
+
+			return deferred.promise;
+		};
+
+		this.getItems = function() {
+			return items;
 		};
 	}
 })();

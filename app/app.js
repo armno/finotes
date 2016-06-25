@@ -4,36 +4,24 @@
 		'ngMaterial'
 	])
 	 .config(function($stateProvider, $urlRouterProvider) {
-			 $urlRouterProvider.otherwise('/home');
+		 $urlRouterProvider.otherwise('/home');
 
-			 $stateProvider.state('home', {
-					 url: '/home',
-					 templateUrl: 'home.html',
-					 controller: HomeCtrl,
-					 controllerAs: 'home',
-					 resolve: {
-						 items: function(ItemService) {
-							 return ItemService.getItems();
-						 }
+		 $stateProvider.state('home', {
+				 url: '/home',
+				 templateUrl: 'app/item/list.html',
+				 controller: 'ItemListCtrl',
+				 controllerAs: 'home',
+				 resolve: {
+					 items: function(ItemService) {
+						 return ItemService.getItems();
 					 }
-			 })
-			 .state('add', {
-					 url: '/add',
-					 templateUrl: 'add.html',
-					 controller: AddCtrl,
-					 controllerAs: 'add'
-			 });
+				 }
+		 })
+		 .state('add', {
+				 url: '/add',
+				 templateUrl: 'app/item/add.html',
+				 controller: 'AddItemCtrl',
+				 controllerAs: 'add'
+		 });
 	 });
-
-	function HomeCtrl(items) {
-		this.message = 'hello from angular';
-		this.items = items;
-	}
-
-	function AddCtrl() {
-		this.title = 'Add new item';
-		this.submit = function(item) {
-			console.log('submitted', item);
-		};
-	}
 })();
