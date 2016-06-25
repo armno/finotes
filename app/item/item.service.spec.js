@@ -42,6 +42,7 @@ describe('ItemService', () => {
 			itemService.addItem(newItem);
 			updateItems = itemService.getItems();
 			expect(updateItems.length).toEqual(5);
+			expect(updateItems[4].id).toEqual(5);
 			expect(updateItems[4].name).toEqual('New Item');
 			expect(updateItems[4].value).toEqual(30);
 		});
@@ -58,7 +59,34 @@ describe('ItemService', () => {
 			var updatedItems = itemService.getItems();
 			expect(updatedItems[4].createdAt).toBeDefined();
 			expect(updatedItems[4].createdAt).toEqual(addedTimestamp);
-		})
+		});
+
+		it('should return false if nothing passed', () => {
+			expect(itemService.addItem()).toBe(false);
+		});
+	});
+
+
+	describe('getItem', () => {
+		it('should be defined', () => {
+			expect(itemService.getItem).toBeDefined();
+			expect(typeof itemService.getItem).toEqual('function');
+		});
+
+		it('should get an item from given item id', () => {
+			var firstItem = itemService.getItem(1);
+			expect(firstItem.id).toEqual(1);
+
+			var lastItem = itemService.getItem(4);
+			expect(lastItem.id).toEqual(4);
+
+			var newItem = {
+				name: 'new new',
+				value: 3
+			};
+			itemService.addItem(newItem);
+			expect(itemService.getItem(5)).toEqual(newItem);
+		});
 	});
 
 });
