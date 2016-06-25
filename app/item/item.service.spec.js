@@ -47,6 +47,25 @@ describe('ItemService', () => {
 			expect(updateItems[4].value).toEqual(30);
 		});
 
+		it('should add first item to the list of the list is empty', () => {
+
+			itemService.clear();
+
+			var newItem = {
+				name: 'First Item',
+				value: 10
+			};
+
+			itemService.addItem(newItem);
+
+			var updatedItems = itemService.getItems();
+			expect(updatedItems.length).toEqual(1);
+			expect(updatedItems[0].id).toEqual(1);
+			expect(updatedItems[0].name).toEqual('First Item');
+			expect(updatedItems[0].value).toEqual(10);
+
+		});
+
 		it('should automatically add createdAt property to newly added item', () => {
 			var newItem = {
 				name: 'another item',
@@ -90,6 +109,27 @@ describe('ItemService', () => {
 
 		it('should be able to handle both string and number param', () => {
 			expect(itemService.getItem(4)).toEqual(itemService.getItem('4'));
+		});
+	});
+
+
+	describe('deleteItem', () => {
+		it('should be defined', () => {
+			expect(itemService.deleteItem).toBeDefined();
+			expect(typeof itemService.deleteItem).toEqual('function');
+		});
+
+		it('should remove the item from the list', () => {
+			itemService.deleteItem(1);
+			expect(itemService.getItem(1)).toBeUndefined();
+		});
+	});
+
+
+	describe('clear', () => {
+		it('should remove all items', () => {
+			itemService.clear();
+			expect(itemService.getItems().length).toEqual(0);
 		});
 	});
 

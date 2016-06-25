@@ -7,7 +7,7 @@
 	function AddItemCtrl(ItemService, $state) {
 
 		this.submit = function(newItem) {
-			ItemService.add(newItem)
+			ItemService.addItem(newItem)
 				.then((isAdded) => {
 					if (isAdded) {
 						$state.go('home');

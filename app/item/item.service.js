@@ -39,10 +39,10 @@
 				return false;
 			}
 
-			// get next id value
+			// get next id value, or use 1 if no stored items
 			var lastItem = _.maxBy(items, 'id');
 
-			newItem.id = lastItem.id + 1;
+			newItem.id = (lastItem) ? lastItem.id + 1 : 1;
 			newItem.createdAt = Math.floor(Date.now() / 1000);
 
 			items.push(newItem);
@@ -58,6 +58,15 @@
 		this.getItem = function(id) {
 			id = +id;
 			return _.find(items, (i) => i.id === id);
+		};
+
+		this.deleteItem = function(id) {
+			id = +id;
+			items.splice(_.indexOf(items, this.getItem(id)), 1);
+		};
+
+		this.clear = function() {
+			items = [];
 		};
 
 	}
