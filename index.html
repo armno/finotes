@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Angular 1.5 101</title>
+	<script src="node_modules/angular/angular.js"></script>
+	<script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+</head>
+<body ng-app="finotes">
+
+	<ul>
+		<li><a ui-sref="home">Home</a></li>
+		<li><a ui-sref="add">Add</a></li>
+	</ul>
+
+	<div ui-view>
+	</div>
+
+	<script>
+		(function() {
+			angular.module('finotes', ['ui.router'])
+				.config(function($stateProvider, $urlRouterProvider) {
+					$urlRouterProvider.otherwise('/home');
+
+					$stateProvider.state('home', {
+						url: '/home',
+						templateUrl: 'home.html',
+						controller: AppCtrl,
+						controllerAs: 'home'
+					})
+					.state('add', {
+						url: '/add',
+						templateUrl: 'add.html',
+						controller: AddCtrl,
+						controllerAs: 'add'
+					})
+				});
+
+			function AppCtrl() {
+				this.message = 'hello from angular';
+			}
+
+			function AddCtrl() {
+				this.title = 'Add new item';
+			}
+		})();
+	</script>
+</body>
+</html>
