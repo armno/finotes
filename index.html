@@ -4,47 +4,27 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Angular 1.5 101</title>
-	<script src="node_modules/angular/angular.js"></script>
-	<script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+	<link rel="stylesheet" href="node_modules/angular-material/angular-material.css" media="all">
 </head>
 <body ng-app="finotes">
 
-	<ul>
-		<li><a ui-sref="home">Home</a></li>
-		<li><a ui-sref="add">Add</a></li>
-	</ul>
+		<md-toolbar class="md-hue-2">
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>Items</span>
+				</h2>
+			</div>
+		</md-toolbar>
 
-	<div ui-view>
-	</div>
+	<div ui-view></div>
 
-	<script>
-		(function() {
-			angular.module('finotes', ['ui.router'])
-				.config(function($stateProvider, $urlRouterProvider) {
-					$urlRouterProvider.otherwise('/home');
+	<script src="node_modules/angular/angular.js"></script>
+	<script src="node_modules/angular-aria/angular-aria.js"></script>
+	<script src="node_modules/angular-animate/angular-animate.js"></script>
+	<script src="node_modules/angular-material/angular-material.js"></script>
 
-					$stateProvider.state('home', {
-						url: '/home',
-						templateUrl: 'home.html',
-						controller: AppCtrl,
-						controllerAs: 'home'
-					})
-					.state('add', {
-						url: '/add',
-						templateUrl: 'add.html',
-						controller: AddCtrl,
-						controllerAs: 'add'
-					})
-				});
+	<script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
 
-			function AppCtrl() {
-				this.message = 'hello from angular';
-			}
-
-			function AddCtrl() {
-				this.title = 'Add new item';
-			}
-		})();
-	</script>
+	<script src="app/app.js"></script>
 </body>
 </html>
