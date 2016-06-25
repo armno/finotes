@@ -9,10 +9,10 @@
 
 		this.goBack = function() {
 			$state.go('home');
-		}
+		};
 
 		this.edit = function(item) {
-			console.log('go to edit mode');
-		}
+			$state.go('edit', { id: item.id });
+		};
 	}
 })();

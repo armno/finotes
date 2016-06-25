@@ -93,4 +93,9 @@ describe('ItemService', () => {
 		});
 	});
 
+
+	describe('updateItem', () => {
+		it('should update item', () => {
+		});
+	});
 });
