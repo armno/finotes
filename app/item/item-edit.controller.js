@@ -9,7 +9,7 @@
 		this.item = item;
 
 		this.submit = function(updatedItem) {
-			console.log(updatedItem);
-		}
+			$state.go('home');
+		};
 	}
 })();

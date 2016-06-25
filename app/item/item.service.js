@@ -60,11 +60,5 @@
 			return _.find(items, (i) => i.id === id);
 		};
 
-		this.updateItem = function(item) {
-			var itemIndex = _.indexOf(items,this.getItem(item.id));
-			console.log(itemIndex);
-			if (itemIndex) {
-			}
-		}
 	}
 })();
