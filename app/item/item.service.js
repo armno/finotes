@@ -5,32 +5,7 @@
 	ItemService.$inject = ['$q'];
 
 	function ItemService($q) {
-		var items = [
-			{
-				id: 1,
-				name: 'Food',
-				value: 35,
-				createdAt: 1466836632981
-			},
-			{
-				id: 2,
-				name: 'Coffee',
-				value: 75,
-				createdAt: 1466836632983
-			},
-			{
-				id: 3,
-				name: 'Drink',
-				value: 90,
-				createdAt: 1466836632984
-			},
-			{
-				id: 4,
-				name: 'Gas',
-				value: 500,
-				createdAt: 1466836632985
-			}
-		];
+		var items = [];
 
 		this.addItem = function(newItem) {
 			var deferred = $q.defer();
@@ -56,6 +31,10 @@
 		};
 
 		this.getItem = function(id) {
+			if (!id) {
+				return items[items.length - 1];
+			}
+
 			id = +id;
 			return _.find(items, (i) => i.id === id);
 		};

@@ -19,9 +19,7 @@ describe('ItemService', () => {
 
 		it('should return a list of existing items initially', () => {
 			var items = itemService.getItems();
-			expect(items.length).toEqual(4);
-			expect(items[0].name).toEqual('Food');
-			expect(items[3].name).toEqual('Gas');
+			expect(items.length).toEqual(0);
 		});
 	});
 
@@ -41,10 +39,10 @@ describe('ItemService', () => {
 
 			itemService.addItem(newItem);
 			updateItems = itemService.getItems();
-			expect(updateItems.length).toEqual(5);
-			expect(updateItems[4].id).toEqual(5);
-			expect(updateItems[4].name).toEqual('New Item');
-			expect(updateItems[4].value).toEqual(30);
+			expect(updateItems.length).toEqual(1);
+			expect(updateItems[0].id).toEqual(1);
+			expect(updateItems[0].name).toEqual('New Item');
+			expect(updateItems[0].value).toEqual(30);
 		});
 
 		it('should add first item to the list of the list is empty', () => {
@@ -76,8 +74,8 @@ describe('ItemService', () => {
 			itemService.addItem(newItem);
 
 			var updatedItems = itemService.getItems();
-			expect(updatedItems[4].createdAt).toBeDefined();
-			expect(updatedItems[4].createdAt).toEqual(addedTimestamp);
+			expect(updatedItems[0].createdAt).toBeDefined();
+			expect(updatedItems[0].createdAt).toEqual(addedTimestamp);
 		});
 
 		it('should return false if nothing passed', () => {
@@ -93,23 +91,49 @@ describe('ItemService', () => {
 		});
 
 		it('should get an item from given item id', () => {
+			var tmpItem = {
+				name: 'temp',
+				value: 1
+			};
+			itemService.addItem(tmpItem);
 			var firstItem = itemService.getItem(1);
 			expect(firstItem.id).toEqual(1);
 
 			var lastItem = itemService.getItem(4);
-			expect(lastItem.id).toEqual(4);
+			expect(lastItem).toBeUndefined();
 
 			var newItem = {
 				name: 'new new',
 				value: 3
 			};
 			itemService.addItem(newItem);
-			expect(itemService.getItem(5)).toEqual(newItem);
+			expect(itemService.getItem(2)).toEqual(newItem);
 		});
 
 		it('should be able to handle both string and number param', () => {
 			expect(itemService.getItem(4)).toEqual(itemService.getItem('4'));
 		});
+
+		it('should return the last item if no item id passed', () => {
+			var item1 = {
+				name: 'item1',
+				value: 10
+			};
+			var item2 = {
+				name: 'item2',
+				value: 20
+			};
+			var item3 = {
+				name: 'item3',
+				value: 30
+			};
+
+			itemService.addItem(item1);
+			itemService.addItem(item2);
+			itemService.addItem(item3);
+
+			expect(itemService.getItem()).toEqual(item3);
+		})
 	});
 
 
