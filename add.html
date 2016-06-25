@@ -1,1 +1,18 @@
-<h1 ng-bind="add.title"></h1>
+<md-content layout-padding>
+	<form name="AddItem">
+		<md-input-container class="md-block" flex-gt-xs>
+			<label for="name">Name</label>
+			<input id="name" ng-model="item.name" type="text",
+				required>
+		</md-input-container>
+		<md-input-container class="md-block">
+			<label for="value">Value</label>
+			<input id="value" ng-model="item.value" type="number"
+			required>
+		</md-input-container>
+
+		<md-button class="md-raised md-primary"
+			type="submit"
+			ng-click="add.submit(item)">Add</md-button>
+	</form>
+</md-content>
